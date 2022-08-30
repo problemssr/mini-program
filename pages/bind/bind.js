@@ -1,9 +1,40 @@
-// pages/index/index.js
+// pages/bind/bind.js
 Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    msg: "随便111",
+    name: "牛牛",
+    path: "/static/default.png",
+  },
+  clickMe() {
+    this.setData({ msg: "修改啦" });
+  },
+  getUserProfile() {
+    let that = this;
+    wx.getUserProfile({
+      desc: "获取授权",
+      success: (res) => {
+        console.log(res);
+        that.setData({
+          name: res.userInfo.nickName,
+        });
+        that.setData({
+          path: res.userInfo.avatarUrl,
+        });
+      },
+      fail: (err) => {},
+    });
+    // wx.login({
+    //   success(res) {
+    //     console.log("login", res);
+    //     that.setData({
+    //       code: res.code,
+    //     });
+    //   },
+    // });
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -44,11 +75,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
-  clickMe(e) {
-    let nid = e.currentTarget.dataset.id;
-    // console.log(nid, e.currentTarget.dataset.name);
-    wx.navigateTo({
-      url: "/pages/redirect/redirect?id=" + nid,
-    });
-  },
 });

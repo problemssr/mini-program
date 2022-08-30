@@ -1,0 +1,5 @@
+/* pages/bind/bind.wxss */
+.head image {
+  height: 200rpx;
+  width: 200rpx;
+}

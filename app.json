@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/redirect/redirect",
+    "pages/bind/bind"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -12,7 +14,8 @@
   },
   "tabBar": {
     "selectedColor": "#0000CD",
-    "list": [{
+    "list": [
+      {
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "static/tabbar/choice_nor.png",
@@ -25,6 +28,5 @@
         "selectedIconPath": "static/tabbar/me_pressed.png"
       }
     ]
-  },
-  "sitemapLocation": "sitemap.json"
+  }
 }

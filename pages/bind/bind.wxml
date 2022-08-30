@@ -1,0 +1,9 @@
+<!--pages/bind/bind.wxml-->
+<text>数据绑定</text>
+<view>数据：{{msg}}</view>
+<button bindtap="clickMe">点我修改</button>
+<view>用户名：{{name}}</view>
+<view class="head">
+  当前头像：<image src="{{path}}"></image>
+</view>
+<button open-type="getUserProfile" bindtap="getUserProfile">授权登录</button>

@@ -1,4 +1,4 @@
-// pages/index/index.js
+// pages/redirect/redirect.js
 Page({
   /**
    * 页面的初始数据
@@ -8,7 +8,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    console.log("re", options);
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -44,11 +46,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {},
-  clickMe(e) {
-    let nid = e.currentTarget.dataset.id;
-    // console.log(nid, e.currentTarget.dataset.name);
-    wx.navigateTo({
-      url: "/pages/redirect/redirect?id=" + nid,
-    });
-  },
 });

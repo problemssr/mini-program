@@ -2,6 +2,8 @@
 
 <view bindtap="clickMe" data-name="花花" data-id="123">点我跳转</view>
 
+<navigator url="/pages/redirect/redirect?id=66">navigator跳转</navigator>
+
 <view>示例一</view>
 <view class="menu-1">
   <image src="/static/hg.jpg"></image>
