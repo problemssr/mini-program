@@ -1,18 +1,18 @@
-// pages/bind/bind.js
+// pages/login/login.js
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    msg: "随便111",
     name: "牛牛",
     path: "/static/default.png",
-    inp: "",
-    phone: "",
-    code: "",
-  },
-  clickMe() {
-    this.setData({ msg: "修改啦" });
+    localPath: "loc",
+    list: ["牛马", "大赛", "化身", "sjij"],
+    userInfo: {
+      name: "aka",
+      age: 18,
+    },
+    imageList: ["/static/hg.jpg", "/static/default.png"],
   },
   getUserProfile() {
     let that = this;
@@ -38,61 +38,30 @@ Page({
     //   },
     // });
   },
-  bindTxt(e) {
-    this.setData({
-      inp: e.detail.value,
-    });
-  },
-  bindPhone(e) {
-    this.setData({ phone: e.detail.value });
-  },
-  bindCode(e) {
-    this.setData({ code: e.detail.value });
-  },
-  /**
-   * 发送短信验证码
-   */
-  messageCode() {
-    if (this.data.phone.length != 11) {
-      wx.showToast({
-        title: "手机号长度错误",
-        icon: "none",
-      });
-      return;
-    }
-    // 正则匹配手机格式
-    var reg = /^(1[3|4|5|6|7|8|9])\d{9}$/;
-    if (!reg.test(this.data.phone)) {
-      wx.showToast({
-        title: "手机号格式错误",
-        icon: "none",
-      });
-      return;
-    }
-    wx.request({
-      url: "http://127.0.0.1:8000/message/",
-      data: { phone: this.data.phone },
-      method: "GET",
-      success: (result) => {
-        console.log(result);
-      },
-      fail: (res) => {},
-      complete: (res) => {},
-    });
-  },
-  /**
-   * 用户登录
-   */
-  login() {
-    wx.request({
-      url: "http://127.0.0.1:8000/login/",
-      data: { phone: this.data.phone, code: this.data.code },
-      method: "POST",
+  getLocalPath() {
+    let that = this;
+    wx.chooseLocation({
       success: (res) => {
-        console.log(res);
+        that.setData({ localPath: res.address });
       },
-      fail: (res) => {},
-      complete: (res) => {},
+      fail: (err) => {},
+    });
+  },
+  uploadImage() {
+    let that = this;
+    wx.chooseMedia({
+      mediaType: ["image", "video"],
+      sourceType: ["album", "camera"],
+      success: (res) => {
+        let arr = [];
+        for (let pic of res.tempFiles) {
+          arr.push(pic.tempFilePath);
+        }
+        that.setData({
+          imageList: that.data.imageList.concat(arr),
+        });
+      },
+      fail: (err) => {},
     });
   },
 

@@ -7,3 +7,17 @@
   当前头像：<image src="{{path}}"></image>
 </view>
 <button open-type="getUserProfile" bindtap="getUserProfile">授权登录</button>
+<!-- <view>输入手机号:{{inp}}</view>
+<input type="text" class="inp" :value="inp" bindinput="bindTxt"></input> -->
+
+<view>手机号：{{phone}}</view>
+<input value="{{phone}}" bindinput="bindPhone" placeholder="请输入手机号"></input>
+
+<view>验证码：{{code}}
+  <button bindtap="messageCode">点击获取验证码 </button>
+</view>
+
+<input value="{{code}}" bindinput="bindCode" placeholder="请输入验证码"></input>
+
+
+<button bindtap="login">登录</button>

@@ -1,0 +1,8 @@
+/* pages/login/login.wxss */
+.head {
+  display: flex;
+}
+.head image {
+  height: 200rpx;
+  width: 200rpx;
+}
