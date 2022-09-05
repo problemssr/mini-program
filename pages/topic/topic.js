@@ -1,35 +1,24 @@
-// pages/pub/pub.js
+// pages/topic/topic.js
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    topicText: "请选择话题",
-    topiId: null,
-    progress: 20,
-    imageList: [
-      { id: 1, title: "图片1", percent: 20 },
-      { id: 2, title: "图片2", percent: 30 },
-      { id: 3, title: "图片3", percent: 50 },
+    topicList: [
+      { id: 1, title: "春节买不到票", count: 100 },
+      { id: 2, title: "黄牛太多", count: 100 },
+      { id: 3, title: "票价太贵", count: 100 },
+      { id: 4, title: "我有黄牛资源", count: 100 },
     ],
   },
-  changePercent() {
-    //data局部修改
-    this.setData({
-      ["imageList[0].percent"]: 80,
-      ["imageList[0].title"]: "taudas",
-    });
-  },
-  getTopic: function () {
-    wx.navigateTo({
-      url: "/pages/topic/topic",
-    });
-  },
-  setTopicData(res) {
-    this.setData({
-      topicText: res.title,
-      topiId: res.id,
-    });
+  choseTopic(e) {
+    var topicInfo = e.currentTarget.dataset.xx;
+    // 把这个值传递给他的父页面
+    var pages = getCurrentPages();
+    var prePage = pages[pages.length - 2];
+    // prePage.setData({ topicText: topicInfo.title });
+    prePage.setTopicData(topicInfo)
+    wx.navigateBack({});
   },
 
   /**

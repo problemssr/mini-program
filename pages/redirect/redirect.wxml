@@ -1,2 +1,9 @@
-<!--pages/redirect/redirect.wxml-->
-<text>pages/redirect/redirect.wxml</text>
+<view wx:for="{{newsList}}" wx:key="index">
+  <navigator url="/pages/newsDetail/newsDetail?newId={{item.id}}">
+    <image src="{{item.cover}}" style="height:100rpx;width:100rpx"></image>
+  </navigator>
+  <view>内容：{{item.content}}</view>
+  <view wx:if="{{item.topic}}">话题：{{item.topic.title}}</view>
+  <view>用户名：{{item.user.nickname}}</view>
+  <image src="{{item.user.avatar}}" style="height:200rpx;width:200rpx"></image>
+</view>

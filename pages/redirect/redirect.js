@@ -1,15 +1,35 @@
 // pages/redirect/redirect.js
+var api = require("../../config/api");
 Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    newsList: [],
+    maxId: 0,
+    minId: 0,
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("re", options);
+    // console.log("re", options);
+    //获取数据库最新数据
+    wx.request({
+      url: api.NewsAPI,
+      method: "GET",
+      dataType: "json",
+      responseType: "text",
+      success: (res) => {
+        this.setData({
+          newsList: res.data,
+          maxId: res.data[0].id,
+          minId: res.data[res.data.length - 1].id,
+        });
+      },
+      fail: (res) => {},
+    });
   },
 
   /**
@@ -35,12 +55,63 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {},
+  onPullDownRefresh: function () {
+    wx.request({
+      url: api.NewsAPI,
+      data: {
+        max_id: this.data.maxId,
+      },
+      method: "GET",
+      dataType: "json",
+      responseType: "text",
+      success: (res) => {
+        if (!res.data.length) {
+          wx.showToast({
+            title: "已是最新数据",
+            icon: "none",
+          });
+          wx.stopPullDownRefresh();
+          return;
+        }
+        var dataList = res.data.reverse();
+        this.setData({
+          newsList: dataList.concat(this.data.newsList),
+          maxId: dataList[0].id,
+        });
+        wx.stopPullDownRefresh();
+      },
+    });
+  },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () {
+    //获取数据库最新数据
+    wx.request({
+      url: api.NewsAPI,
+      data: {
+        min_id: this.data.minId,
+      },
+      method: "GET",
+      dataType: "json",
+      responseType: "text",
+      success: (res) => {
+        if (!res.data.length) {
+          wx.showToast({
+            title: "已到底部",
+            icon: "none",
+          });
+          return;
+        }
+        this.setData({
+          newsList: this.data.newsList.concat(res.data),
+          minId: res.data[res.data.length - 1].id,
+        });
+      },
+      fail: (res) => {},
+    });
+  },
 
   /**
    * 用户点击右上角分享

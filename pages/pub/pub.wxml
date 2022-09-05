@@ -1,2 +1,13 @@
-<!--pages/pub/pub.wxml-->
-<text>pages/pub/pub.wxml</text>
+<view bindtap="getTopic">{{topicText}}</view>
+<view>
+  进度条
+  <progress percent="{{progress}}" activeColor="#8EE5EE"></progress>
+</view>
+<view>
+  <view>点按钮，图1进度条80</view>
+  <view wx:for="{{imageList}}">
+    <view>{{item.title}}</view>
+    <progress percent="{{item.percent}}"></progress>
+  </view>
+</view>
+<button bindtap="changePercent">点击</button>

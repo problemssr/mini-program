@@ -13,9 +13,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/home/home",
-          "pathName": "pages/home/home",
-          "query": "",
+          "name": "pages/newsDetail/newsDetail",
+          "pathName": "pages/newsDetail/newsDetail",
+          "query": "newId=36",
           "scene": null
         }
       ]

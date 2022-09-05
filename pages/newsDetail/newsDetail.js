@@ -1,41 +1,26 @@
-// pages/pub/pub.js
+// pages/newsDetail/newsDetail.js
+var api = require("../../config/api");
 Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    topicText: "请选择话题",
-    topiId: null,
-    progress: 20,
-    imageList: [
-      { id: 1, title: "图片1", percent: 20 },
-      { id: 2, title: "图片2", percent: 30 },
-      { id: 3, title: "图片3", percent: 50 },
-    ],
-  },
-  changePercent() {
-    //data局部修改
-    this.setData({
-      ["imageList[0].percent"]: 80,
-      ["imageList[0].title"]: "taudas",
-    });
-  },
-  getTopic: function () {
-    wx.navigateTo({
-      url: "/pages/topic/topic",
-    });
-  },
-  setTopicData(res) {
-    this.setData({
-      topicText: res.title,
-      topiId: res.id,
-    });
-  },
+  data: {},
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    var newsId = options.newId;
+    wx.request({
+      url: api.NewsAPI + newsId + "/",
+      method: "GET",
+      dataType: "json",
+      responseType: "text",
+      success: (res) => {
+        console.log(res.data);
+      },
+    });
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
